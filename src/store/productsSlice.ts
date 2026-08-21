@@ -23,7 +23,7 @@ const productsSlice = createSlice({
     toggleLike: (state, action: PayloadAction<string>) => {
       const id = action.payload
       if (state.likedIds.includes(id)) {
-        state.likedIds = state.likedIds.filter(i => i !== id)
+        state.likedIds = state.likedIds.filter((i) => i !== id)
       } else {
         state.likedIds.push(id)
       }
@@ -40,5 +40,6 @@ const productsSlice = createSlice({
   },
 })
 
-export const { toggleLike, deleteProduct, addCustomProduct, setFilter } = productsSlice.actions
+export const { toggleLike, deleteProduct, addCustomProduct, setFilter } =
+  productsSlice.actions
 export default productsSlice.reducer

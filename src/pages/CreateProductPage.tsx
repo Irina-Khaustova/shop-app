@@ -12,7 +12,11 @@ const schema = z.object({
   description: z.string().min(10, 'Минимум 10 символов'),
   price: z.number().min(1, 'Цена должна быть больше 0'),
   category: z.string().min(2, 'Укажите категорию'),
-  imageUrl: z.string().url('Введите корректный URL').optional().or(z.literal('')),
+  imageUrl: z
+    .string()
+    .url('Введите корректный URL')
+    .optional()
+    .or(z.literal('')),
 })
 
 type FormData = z.infer<typeof schema>
@@ -52,35 +56,51 @@ function CreateProductPage() {
         <div className={styles.field}>
           <label>Название *</label>
           <input {...register('name')} placeholder="Введите название" />
-          {errors.name && <span className={styles.error}>{errors.name.message}</span>}
+          {errors.name && (
+            <span className={styles.error}>{errors.name.message}</span>
+          )}
         </div>
         <div className={styles.field}>
           <label>Описание *</label>
-          <textarea {...register('description')} placeholder="Введите описание" rows={4} />
-          {errors.description && <span className={styles.error}>{errors.description.message}</span>}
+          <textarea
+            {...register('description')}
+            placeholder="Введите описание"
+            rows={4}
+          />
+          {errors.description && (
+            <span className={styles.error}>{errors.description.message}</span>
+          )}
         </div>
         <div className={styles.field}>
           <label>Цена *</label>
-          <input 
-  {...register('price', { valueAsNumber: true })} 
-  type="number" 
-  placeholder="0" 
-  min="1"
-/>
-          {errors.price && <span className={styles.error}>{errors.price.message}</span>}
+          <input
+            {...register('price', { valueAsNumber: true })}
+            type="number"
+            placeholder="0"
+            min="1"
+          />
+          {errors.price && (
+            <span className={styles.error}>{errors.price.message}</span>
+          )}
         </div>
         <div className={styles.field}>
           <label>Категория *</label>
           <input {...register('category')} placeholder="Введите категорию" />
-          {errors.category && <span className={styles.error}>{errors.category.message}</span>}
+          {errors.category && (
+            <span className={styles.error}>{errors.category.message}</span>
+          )}
         </div>
         <div className={styles.field}>
           <label>URL картинки</label>
           <input {...register('imageUrl')} placeholder="https://..." />
-          {errors.imageUrl && <span className={styles.error}>{errors.imageUrl.message}</span>}
+          {errors.imageUrl && (
+            <span className={styles.error}>{errors.imageUrl.message}</span>
+          )}
         </div>
         <div className={styles.buttons}>
-          <button type="button" onClick={() => navigate('/products')}>Отмена</button>
+          <button type="button" onClick={() => navigate('/products')}>
+            Отмена
+          </button>
           <button type="submit">Добавить</button>
         </div>
       </form>

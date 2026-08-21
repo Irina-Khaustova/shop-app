@@ -22,7 +22,11 @@ function Pagination({ currentPage, totalPages, onPageChange }: Props) {
       pages.push('...')
     }
 
-    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+    for (
+      let i = Math.max(2, currentPage - 1);
+      i <= Math.min(totalPages - 1, currentPage + 1);
+      i++
+    ) {
       pages.push(i)
     }
 
@@ -46,7 +50,9 @@ function Pagination({ currentPage, totalPages, onPageChange }: Props) {
       </button>
       {getPages().map((page, index) =>
         page === '...' ? (
-          <span key={`dots-${index}`} className={styles.dots}>...</span>
+          <span key={`dots-${index}`} className={styles.dots}>
+            ...
+          </span>
         ) : (
           <button
             key={page}

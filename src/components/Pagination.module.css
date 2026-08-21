@@ -5,14 +5,14 @@
 }
 
 .pagination {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .active {
-    background: #4f5d6d;
-    color: white;
-    border-color: #333;
+  background: #4f5d6d;
+  color: white;
+  border-color: #333;
 }

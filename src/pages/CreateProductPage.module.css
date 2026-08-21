@@ -54,7 +54,7 @@
   font-size: 14px;
 }
 
-.buttons button[type="submit"] {
+.buttons button[type='submit'] {
   background: #333;
   color: white;
   border-color: #333;
