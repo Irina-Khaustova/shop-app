@@ -7,6 +7,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/products" replace />} />
+      <Route path="/shop-app/" element={<Navigate to="/products" replace />} />
       <Route path="/products" element={<ProductsPage />} />
       <Route path="/products/:id" element={<ProductPage />} />
       <Route path="/create-product" element={<CreateProductPage />} />
