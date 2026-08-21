@@ -1,0 +1,25 @@
+.page {
+  width: 80%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.createBtn {
+  padding: 10px 20px;
+  background: #4f5d6d;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.createBtn:hover {
+  background: #1a2430;
+}

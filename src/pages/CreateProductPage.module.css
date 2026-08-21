@@ -1,0 +1,61 @@
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.field input,
+.field textarea {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: #333;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.buttons button[type="submit"] {
+  background: #333;
+  color: white;
+  border-color: #333;
+}
