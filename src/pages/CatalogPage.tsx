@@ -41,6 +41,7 @@ function CatalogPage() {
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   )
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -49,7 +50,7 @@ function CatalogPage() {
           + Добавить продукт
         </Link>
       </div>
-      <Filters />
+      <Filters onFilterChange={() => setCurrentPage(1)} />
       <ProductList products={paginatedProducts} />
       <Pagination
         currentPage={currentPage}

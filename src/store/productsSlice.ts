@@ -37,9 +37,22 @@ const productsSlice = createSlice({
     setFilter: (state, action: PayloadAction<'all' | 'liked'>) => {
       state.filter = action.payload
     },
+    updateProduct: (state, action: PayloadAction<ProductCardData>) => {
+      const index = state.customProducts.findIndex(
+        (p) => p.id === action.payload.id
+      )
+      if (index !== -1) {
+        state.customProducts[index] = action.payload
+      }
+    },
   },
 })
 
-export const { toggleLike, deleteProduct, addCustomProduct, setFilter } =
-  productsSlice.actions
+export const {
+  toggleLike,
+  deleteProduct,
+  addCustomProduct,
+  setFilter,
+  updateProduct,
+} = productsSlice.actions
 export default productsSlice.reducer

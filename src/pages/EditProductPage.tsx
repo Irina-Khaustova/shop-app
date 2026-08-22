@@ -1,10 +1,10 @@
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { addCustomProduct } from '../store/productsSlice'
-import type { ProductCardData } from '../types/product'
+import { updateProduct } from '../store/productsSlice'
+import type { RootState } from '../store'
 import styles from './CreateProductPage.module.css'
 
 const schema = z.object({
@@ -21,9 +21,14 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-function CreateProductPage() {
-  const dispatch = useDispatch()
+function EditProductPage() {
+  const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const product = useSelector((state: RootState) =>
+    state.products.customProducts.find((p) => p.id === id)
+  )
 
   const {
     register,
@@ -31,27 +36,44 @@ function CreateProductPage() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    defaultValues: product
+      ? {
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          category: product.category,
+          imageUrl: product.imageUrl,
+        }
+      : undefined,
   })
 
+  if (!product) {
+    return (
+      <div style={{ padding: '20px' }}>
+        <p>Редактирование доступно только для созданных вами продуктов.</p>
+        <button onClick={() => navigate(-1)}>← Назад</button>
+      </div>
+    )
+  }
+
   const onSubmit = (data: FormData) => {
-    const newProduct: ProductCardData = {
-      id: `custom-${crypto.randomUUID()}`,
-      name: data.name,
-      description: data.description,
-      price: data.price,
-      category: data.category,
-      imageUrl: data.imageUrl ||  'https://placehold.co/300x300?text=No+Image',  
-      isLiked: false,
-      isCustom: true,
-    }
-    console.log(data)
-    dispatch(addCustomProduct(newProduct))
-    navigate('/products')
+    dispatch(
+      updateProduct({
+        ...product,
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        category: data.category,
+        imageUrl: data.imageUrl || product.imageUrl,
+      })
+    )
+    alert('Изменения сохранены!')
+    navigate(`/products/${id}`)
   }
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Добавить продукт</h1>
+      <h1 className={styles.title}>Редактировать продукт</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.field}>
           <label>Название *</label>
@@ -98,14 +120,14 @@ function CreateProductPage() {
           )}
         </div>
         <div className={styles.buttons}>
-          <button type="button" onClick={() => navigate('/products')}>
+          <button type="button" onClick={() => navigate(-1)}>
             Отмена
           </button>
-          <button type="submit">Добавить</button>
+          <button type="submit">Сохранить</button>
         </div>
       </form>
     </div>
   )
 }
 
-export default CreateProductPage
+export default EditProductPage
